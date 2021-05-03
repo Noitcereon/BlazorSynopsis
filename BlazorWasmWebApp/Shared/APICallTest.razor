@@ -1,0 +1,69 @@
+﻿@using System.Security.Cryptography.X509Certificates
+@using ModelLib
+@inject IHttpClientFactory HttpFactory
+@page "/test"
+
+
+<h2>CV Item Data</h2>
+
+@if (string.IsNullOrWhiteSpace(_errorMessage) == false)
+{
+    <div class="alert-danger">@_errorMessage</div>
+}
+@if(_cvItems is null && string.IsNullOrWhiteSpace(_errorMessage))
+{
+    <div class="h2">Loading...</div>
+}
+else
+{
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Location</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Category</th>
+        </tr>
+        @foreach (var cvItem in _cvItems)
+        {
+            <tr>
+
+                <td>@cvItem.Id</td>
+                <td>@cvItem.Title</td>
+                <td>@cvItem.Location</td>
+                <td>@cvItem.DateFromString</td>
+                <td>@cvItem.DateToString</td>
+                <td>@cvItem.Category.Name</td>
+
+            </tr>
+        }
+    </table>
+}
+
+@code
+{
+    private CVItem[] _cvItems;
+    private string _errorMessage;
+
+    protected override Task OnInitializedAsync()
+    {
+        return FetchCVItems();
+
+    }
+
+    private async Task FetchCVItems()
+    {
+        try
+        {
+            var httpClient = HttpFactory.CreateClient("CvAPI");
+
+            _cvItems = await httpClient.GetFromJsonAsync<CVItem[]>("CVItems");
+            _errorMessage = "";
+        }
+        catch (Exception e)
+        {
+            _errorMessage = $"API call failed: {e.Message}";
+        }
+    }
+}
