@@ -49,7 +49,6 @@ else
     protected override Task OnInitializedAsync()
     {
         return FetchCVItems();
-
     }
 
     private async Task FetchCVItems()
@@ -66,4 +65,5 @@ else
             _errorMessage = $"API call failed: {e.Message}";
         }
     }
+
 }
