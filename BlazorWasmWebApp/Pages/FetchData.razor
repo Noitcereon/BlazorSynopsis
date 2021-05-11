@@ -33,21 +33,29 @@ else
         </tbody>
     </table>
 }
-<APICallTest/>
+<APICallTest />
+<Counter>
+    <ChildContent>OnInit calls: @_onInitializedCalls</ChildContent>
+</Counter>
 
 @code {
     private WeatherForecast[] forecasts;
 
+    private static int _onInitializedCalls;
+
     protected override async Task OnInitializedAsync()
     {
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+
+        _onInitializedCalls++;
+
         //var response = await Http.GetAsync("sample-data/weather.json");
         //if (response.IsSuccessStatusCode)
         //{
         //    forecasts = await response.Content.ReadFromJsonAsync<WeatherForecast[]>();
         //}
-
     }
+
 
     public class WeatherForecast
     {
