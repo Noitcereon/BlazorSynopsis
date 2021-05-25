@@ -1,0 +1,21 @@
+﻿@using BlazorPWA.Pages
+
+<h2>Page @PageNumber</h2>
+<p>
+    <b>RenderFragment (ChildContent):</b> @ChildContent
+</p>
+
+<p>
+    <b>RenderFragment (OtherChildContent):</b> @OtherChildContent
+</p>
+@code
+{
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment OtherChildContent { get; set; }
+
+    [Parameter]
+    public int PageNumber { get; set; }
+}

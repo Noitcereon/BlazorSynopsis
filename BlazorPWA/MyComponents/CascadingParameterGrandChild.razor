@@ -1,0 +1,10 @@
+﻿@using BlazorPWA.Pages
+<h3>This is the grand child component</h3>
+<p style="color:@GrandParentComponent.PrimaryColor">This should be red (gc)</p>
+<p style="color:@GrandParentComponent.SecondaryColor">This should be green (gc)</p>
+<p style="color:@GrandParentComponent.TertiaryColor">This should be blue (gc)</p>
+
+@code {
+    [CascadingParameter]
+    public CascadingParametersTest GrandParentComponent { get; set; }
+}

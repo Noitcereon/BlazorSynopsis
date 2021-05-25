@@ -1,0 +1,12 @@
+﻿@using BlazorPWA.Pages
+<h3>This is the child component</h3>
+<p style="color:@ParentComponent.PrimaryColor">This should be red (c)</p>
+<p style="color:@ParentComponent.SecondaryColor">This should be green (c)</p>
+<p style="color:@ParentComponent.TertiaryColor">This should be blue (c)</p>
+
+<CascadingParameterGrandChild />
+
+@code {
+    [CascadingParameter]
+    public CascadingParametersTest ParentComponent { get; set; }
+}

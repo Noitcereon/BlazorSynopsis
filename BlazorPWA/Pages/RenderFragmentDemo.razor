@@ -1,0 +1,46 @@
+﻿@page "/renderfragmentdemo"
+@using BlazorPWA.MyComponents
+
+<h1>RenderFragment Demonstration</h1>
+
+<nav>
+    <ul class="pagination">
+        @foreach (var paginationPage in _pages)
+        {
+            <li class="page-item page-link" @onclick="@(x => GoToPage(paginationPage.Key))">@paginationPage.Key</li>
+        }
+    </ul>
+</nav>
+<PaginationPage PageNumber="_currentPage">
+    @*@_currentPageContent*@
+    <ChildContent>@_currentPageContent</ChildContent>
+    <OtherChildContent><div class="text-success d-inline">This is the other render fragment</div></OtherChildContent>
+</PaginationPage>
+
+
+@code{
+    private readonly Dictionary<int, string> _pages = new();
+    private int _currentPage;
+    private string _currentPageContent;
+    private void GoToPage(int pageNumber)
+    {
+        _currentPage = pageNumber;
+        _currentPageContent = _pages.First(x => x.Key == pageNumber).Value;
+    }
+
+    private void PopulatePages()
+    {
+        for (int i = 1; i < 6; i++)
+        {
+            _pages.Add(i, $"This is content for page {i}");
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        PopulatePages();
+        var initialPage = _pages.First();
+        _currentPage = initialPage.Key;
+        _currentPageContent = initialPage.Value;
+    }
+}

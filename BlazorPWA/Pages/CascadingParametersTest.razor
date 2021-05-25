@@ -1,0 +1,21 @@
+﻿@page "/cascading-parameters-test"
+@using BlazorPWA.MyComponents
+
+<h1>Cascading parameters test.</h1>
+<h2> This is the parent component.</h2>
+<p style="color:@PrimaryColor">This should be red</p>
+<p style="color:@SecondaryColor">This should be green</p>
+<p style="color:@TertiaryColor">This should be blue</p>
+<CascadingValue Value="this">
+    <CascadingParameterChild />
+</CascadingValue>
+
+@code
+{
+    [CascadingParameter]
+    private CascadingParametersTest ParentComponent { get; set; }
+
+    public string PrimaryColor { get; set; } = "red";
+    public string SecondaryColor { get; set; } = "green";
+    public string TertiaryColor { get; set; } = "blue";
+}
