@@ -18,6 +18,6 @@ self.addEventListener('activated', (e) => {
 })
 
 self.addEventListener('fetch', (e) => {
-    console.log("Service Worker: intercepted a fetch call");
-    console.log(e.request);
+    //console.log("Service Worker: intercepted a fetch call");
+    //console.log(e.request);
 })

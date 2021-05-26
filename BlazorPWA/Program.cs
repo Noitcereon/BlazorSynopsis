@@ -21,6 +21,13 @@ namespace BlazorPWA
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress),
                 DefaultRequestVersion = HttpVersion.Version20});
 
+            // AddHttpClient comes from the Microsoft.Extentions.Http NuGet package.
+            builder.Services.AddHttpClient("CvAPI", clientConfig =>
+            {
+                clientConfig.BaseAddress = new Uri("https://dynamiccv.azurewebsites.net/api/");
+                clientConfig.Timeout = TimeSpan.FromSeconds(10);
+            });
+
             await builder.Build().RunAsync();
         }
     }
