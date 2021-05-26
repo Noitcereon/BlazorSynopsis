@@ -1,0 +1,33 @@
+﻿@page "/data-bindings"
+
+<h1>Data Bindings</h1>
+
+<h2>One-way binding</h2>
+<p>Value: @_oneWayBinding</p>
+
+<h2>Two-way binding</h2>
+<input @bind="@_twoWayBinding"/>
+<p>Value: @_twoWayBinding</p>
+
+<h2>Event binding</h2>
+<input @bind="_eventBinding" @bind:event="oninput"/>
+<p>Value: @_eventBinding</p>
+
+<h2>Event binding 2</h2>
+<button @onclick="IncreaseEventBinding2Value">Click to increase below value</button>
+<p>Value: @_eventBinding2</p>
+@code
+{
+    private string _oneWayBinding = "This is a one way binding.";
+
+    private string _twoWayBinding = "Two-way";
+
+    private string _eventBinding = "Event-binding (also two-way)";
+
+    private int _eventBinding2;
+
+    private void IncreaseEventBinding2Value()
+    {
+        _eventBinding2++;
+    }
+}
